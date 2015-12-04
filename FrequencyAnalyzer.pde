@@ -10,23 +10,24 @@ class FrequencyAnalyzer{
   FrequencyAnalyzer(PApplet app){
     this.app = app;
     fft = new FFT(app, bands);
-    in = new SoundFile(app, "music.mp3");
+    this.in = new SoundFile(app, "music.mp3");
   }
   void setup() {
-    in.play();
+    this.in.play();
     
     // patch the AudioIn
     fft.input(in);
   }      
   
   void draw() { 
-    
     fft.analyze(spectrum);
-    stroke(0,255,0);
+    colorMode(HSB);
+    stroke(app.frameCount%255,255, 255);
     for(int i = 0; i < bands; i++){
+      
     // The result of the FFT is normalized
     // draw the line for frequency band i scaling it up by 5 to get more amplitude.
-    line( i, height, i, height - spectrum[i]*height*5 );
+    app.line( i, height, i, height - spectrum[i]*height*5 );
     } 
   }
 }
