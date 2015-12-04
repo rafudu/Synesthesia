@@ -3,7 +3,7 @@ import processing.sound.*;
 class FrequencyAnalyzer{
   FFT fft;
   SoundFile in;
-  int bands = 512;
+  int bands = 2048;
   PApplet app;
   float[] spectrum = new float[bands];
 
