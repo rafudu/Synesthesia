@@ -5,7 +5,7 @@ SynesthesiaMapper mapper;
 
 
 void setupSynesthesias(){
-  Synesthesia s = new Synesthesia();
+  Synesthesia s = new VHS();
   s.setTriggerZone(10,10,70,200);
   mapper.addSynesthesia(s);
   
@@ -18,5 +18,8 @@ void setup(){
   setupSynesthesias();
 }
 void draw(){
+  noStroke();
+  fill(0xAA000000);
+  rect(0,0,width,height);
   mapper.draw();
 }
