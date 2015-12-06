@@ -20,27 +20,3 @@ class TriggerZone{
     rect(this.x, this.y, this.width, this.height);
   }
 }
-
-class TriggerZones{
-  List<TriggerZone> zones = new ArrayList<TriggerZone>();
-  void addZone(TriggerZone t){
-    zones.add(t);
-  }
-  public void trigger(float x, float y){
-    for (ListIterator<TriggerZone> it = zones.listIterator(zones.size()); it.hasPrevious(); ) {
-      TriggerZone t = it.previous();
-      if(t.has_point(x,y)){
-
-      }
-    }
-  }
-  void drawZones(){
-    colorMode(RGB);
-    for (ListIterator<TriggerZone> it = zones.listIterator(zones.size()); it.hasPrevious(); ) {
-      TriggerZone t = it.previous();
-      noStroke();
-      fill(frameCount%255, 255,255);
-      rect(t.x, t.y, t.width, t.height);
-    }
-  }
-}

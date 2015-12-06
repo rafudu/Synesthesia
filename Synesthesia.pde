@@ -27,11 +27,11 @@ class Synesthesia {
     this.trigger_zone.draw();
   }
   public void draw(){
-    //if(this.points.size() > 0){
+    if(this.points.size() > 0){
       println(this.points.size());
-    //}else {
-      //println("---");
-    //}
+    }else {
+      println("---");
+    }
     this.points.clear();
   }
   public void trigger(){}
