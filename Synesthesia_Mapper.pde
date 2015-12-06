@@ -1,6 +1,7 @@
 TriggerZones zones = new TriggerZones();
 FrequencyAnalyzer f;
 Mapper m = new Mapper();
+VHS vhs = new VHS();
 class Mapper {
   public FrequencyAnalyzer f;
   Mapper(){
@@ -23,20 +24,20 @@ void setup(){
   background(0);
   
   size(500,500);
-  TriggerZone t = new TriggerZone(250,250,40,40);
-  TriggerZone t2 = new TriggerZone(150,150,40,40);
-  zones.addZone(t);
-  zones.addZone(t2);
-  m.setAnalyzer(new FrequencyAnalyzer(this)); 
+  
+  zones.addZone(new TriggerZone(10,height-200,70,40, vhs));
+  zones.addZone(new TriggerZone(90,height-200,40,40, vhs));
+  m.setAnalyzer(new FrequencyAnalyzer(this, zones));
   m.f.setup();
   
 }
-
 void draw(){
   
-  zones.drawZones();
+  
   colorMode(HSB);
   fill(0x0A000000);
   rect(0,0, width, height);
+  vhs.draw();
+  
   m.f.draw();
 }
