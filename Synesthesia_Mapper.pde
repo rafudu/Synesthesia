@@ -6,7 +6,7 @@ SynesthesiaMapper mapper;
 
 void setupSynesthesias(){
   Synesthesia s = new Synesthesia();
-  s.setTriggerZone(10,height-200,70,40);
+  s.setTriggerZone(10,10,70,200);
   mapper.addSynesthesia(s);
   
 }

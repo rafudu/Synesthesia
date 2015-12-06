@@ -16,7 +16,7 @@ class TriggerZone{
   }
   void draw(){
     colorMode(RGB);
-    fill(255,255,255);
+    fill(0,0,0, 50);
     rect(this.x, this.y, this.width, this.height);
   }
 }

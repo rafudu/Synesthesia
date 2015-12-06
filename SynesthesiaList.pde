@@ -11,13 +11,15 @@ class SynesthesiaList{
   }
   public void consolidatePoints(){
     // filtra a lista de pontos para 
-    setPoints(points);
+    setPoints(this.points);
   }
-  public void setPoints(List points){
+  public void setPoints(List _points){
+    
     for (ListIterator<Synesthesia> it = synesthesias.listIterator(synesthesias.size()); it.hasPrevious(); ) {
       Synesthesia s = it.previous();
-      s.addPoints(points);
+      s.addPoints(_points);
     }
+    this.points.clear();
   }
   
   public void draw(){
