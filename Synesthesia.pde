@@ -4,8 +4,8 @@ class Synesthesia {
   public float width;
   public float height;
   TriggerZone trigger_zone;
-  List<float[]> points; // Os pontos que estão dentro da área de gatilho, com coordenadas x e y
-  List<float[]> points_normalized; // Os pontos que estão dentro da área de gatilho, com coordenadas x e y, normalizados através da função normalize
+  List<float[]> points = new ArrayList<float[]>(); // Os pontos que estão dentro da área de gatilho, com coordenadas x e y
+  List<float[]> points_normalized = new ArrayList<float[]>(); // Os pontos que estão dentro da área de gatilho, com coordenadas x e y, normalizados através da função normalize
   public void bindTriggerZone(TriggerZone z){
     this.trigger_zone = z;
   }
@@ -23,7 +23,9 @@ class Synesthesia {
     }
   }
 
-  
+  public void drawZone(){
+    this.trigger_zone.draw();
+  }
   public void draw(){
     println("Draw synesthesia");
   }

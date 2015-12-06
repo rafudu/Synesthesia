@@ -19,9 +19,11 @@ class SynesthesiaList{
       s.addPoints(points);
     }
   }
+  
   public void draw(){
     for (ListIterator<Synesthesia> it = synesthesias.listIterator(synesthesias.size()); it.hasPrevious(); ) {
       Synesthesia s = it.previous();
+      s.drawZone();
       s.draw();
     }
     
