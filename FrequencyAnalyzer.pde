@@ -45,9 +45,5 @@ class FrequencyAnalyzer{
     app.line( i, height, i, lineY );
     
     }
-    if(callVHS){
-      println("VHS");
-      
-    }
   }
 }
