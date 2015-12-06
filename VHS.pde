@@ -13,7 +13,7 @@ class VHS extends Synesthesia{
       
     randomSeed(frameCount);
     pushMatrix();
-    int displacement = (frameCount%height);   
+    float displacement = (frameCount%height);   
     translate(0, displacement-1);
       for (int i=0; i < height+displacement; i++) {
         float r = random(0, 255);

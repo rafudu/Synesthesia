@@ -1,43 +1,32 @@
-TriggerZones zones = new TriggerZones();
-FrequencyAnalyzer f;
-Mapper m = new Mapper();
-VHS vhs = new VHS();
-class Mapper {
-  public FrequencyAnalyzer f;
-  Mapper(){
-    
-  }
-  public void setAnalyzer(FrequencyAnalyzer f){
-    this.f = f;
-  }
-  void setup(){
-    f.setup();
-  }
+import processing.sound.*;
 
-  
-  void draw(){
-    f.draw();
+SynesthesiaMapper mapper;
+
+class SynesthesiaMapper {
+  FrequencyAnalyzer frequency_analyzer;
+  SynesthesiaMapper(FrequencyAnalyzer frequency_analyzer){
+    this.frequency_analyzer = frequency_analyzer;
+    frequency_analyzer.setup();
   }
+  void draw(){
+    frequency_analyzer.draw();
+  }
+  
 }
+
+
+void setupSynesthesias(){
+  Synesthesia s = new Synesthesia();
+  s.setTriggerZone(10,height-200,70,40);
+  //frequency_analyzer.addSynesthesia(s);
+  
+}
+
 void setup(){
-  noStroke();
-  background(0);
-  
   size(500,500);
-  
-  zones.addZone(new TriggerZone(10,height-200,70,40, vhs));
-  zones.addZone(new TriggerZone(90,height-200,40,40, vhs));
-  m.setAnalyzer(new FrequencyAnalyzer(this, zones));
-  m.f.setup();
-  
+  background(0);
+  mapper = new SynesthesiaMapper(new FrequencyAnalyzer(this));
 }
 void draw(){
-  
-  
-  colorMode(HSB);
-  fill(0x0A000000);
-  rect(0,0, width, height);
-  vhs.draw();
-  
-  m.f.draw();
+  mapper.draw();
 }
