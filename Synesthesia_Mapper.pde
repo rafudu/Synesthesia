@@ -18,7 +18,7 @@ void setup(){
   setupSynesthesias();
 }
 void draw(){
-  s.setTriggerZone(mouseX,mouseY,70,50);
+  s.setTriggerZone(mouseX,mouseY-500,70,500);
   noStroke();
   fill(0xAA000000);
   rect(0,0,width,height);

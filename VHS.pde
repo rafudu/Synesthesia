@@ -22,10 +22,12 @@ class VHS extends Synesthesia {
     
       for (int i=0; i < height+displacement; i++) {
         float r = random(0, 255);
-        int fc = frameCount%100;
+        
+        int noiseThreshold = round(random(100,500));
+        int fc = frameCount%noiseThreshold;
         stroke(r,r,r,this.opacity);//, 255,255);
         
-        int noiseStart = round(random(0,100));
+        int noiseStart = round(random(0,noiseThreshold));
         if(fc > noiseStart && fc < noiseStart+2){
           displacement = 0;
         }
