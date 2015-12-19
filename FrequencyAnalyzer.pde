@@ -19,10 +19,10 @@ class FrequencyAnalyzer{
   }
   
   void setup() {
-    this.ain.start();
-    fft.input(ain);
-    //this.in.play();
-    //fft.input(in);
+    //this.ain.start();
+    //fft.input(ain);
+    this.in.play();
+    fft.input(in);
   }
   void draw() {
     colorMode(HSB);

@@ -6,6 +6,7 @@ class VHS extends Synesthesia {
   }
   void draw(){
     this.opacity = this.points.size()*25;
+    this.opacity = 0;
     drawNoise();
     
   }
@@ -17,7 +18,7 @@ class VHS extends Synesthesia {
     randomSeed(frameCount);
     pushMatrix();
     float displacement = (frameCount%height);
-    println(height);
+    
     translate(0, displacement-1);
     
       for (int i=0; i < height+displacement; i++) {

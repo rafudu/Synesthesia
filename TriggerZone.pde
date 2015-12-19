@@ -5,14 +5,31 @@ class TriggerZone{
   public float y;
   public float width;
   public float height;
+  public float x2;
+  public float topY;
+  public float baseY;
+  
   TriggerZone(float x, float y, float width, float height){
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
+    this.x2 = this.x+this.width;
+    this.topY = this.y;
+    this.baseY = this.y+this.height;
   }
+  public float baseY(){
+    return this.y+this.height;
+  }
+
   public boolean has_point(float x, float y){
-    return (x >= this.x && x <= this.x+this.width && y >= this.y && y <= this.y + this.height);
+    
+    if ((x >= this.x && x <= this.x+this.width && y <= this.y + this.height)){
+      println(x);
+      return true;
+    }else {
+      return false;
+    }
   }
   void draw(){
     colorMode(RGB);

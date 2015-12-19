@@ -26,6 +26,7 @@ class SynesthesiaList{
     for (ListIterator<Synesthesia> it = synesthesias.listIterator(synesthesias.size()); it.hasPrevious(); ) {
       Synesthesia s = it.previous();
       s.drawZone();
+      s.drawElasticZone();
       s.draw();
     }
     
