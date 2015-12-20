@@ -7,10 +7,18 @@ class Synesthesia {
   
   TriggerZone trigger_zone;
   TriggerZone elastic_zone;
+  
+  boolean elastic_zone_crop_x = false;
+  boolean elastic_zone_crop_y = true;
+  boolean elastic_zone_lock_base_y = true;
+  boolean elastic_zone_below_top_y = true;
+  boolean elastic_zone_above_top_y = false;
+  
   List<float[]> points = new ArrayList<float[]>(); // Os pontos que estão dentro da área de gatilho, com coordenadas x e y
   List<float[]> points_normalized = new ArrayList<float[]>(); // Os pontos que estão dentro da área de gatilho, com coordenadas x e y, normalizados através da função normalize
   List<Float> pointsX = new ArrayList();
   List<Float> pointsY = new ArrayList();
+  float pointsArea = 0;
   public void bindTriggerZone(TriggerZone z){
     this.trigger_zone = z;
   }
@@ -28,7 +36,7 @@ class Synesthesia {
     this.points.clear();
     pointsX.clear();
     pointsY.clear();
-  
+    pointsArea = 0;
   }
   
   public void addPoints(List _points){
@@ -49,11 +57,34 @@ class Synesthesia {
     setupElasticZone();
   }
   public void setupElasticZone(){
+    float xLeft, xRight, yTop, yBottom;
     if(this.points.size() > 0){
-      float xLeft = this.pointsX.get(0);
-      float xRight = this.pointsX.get(this.pointsX.size()-1);
-      float yTop = this.pointsY.get(0);
-      float yBottom = this.pointsY.get(this.pointsY.size()-1);
+      if(elastic_zone_crop_x){
+         xLeft = this.pointsX.get(0);
+         xRight = this.pointsX.get(this.pointsX.size()-1);
+      }else {
+         xLeft = this.trigger_zone.x;
+         xRight = this.trigger_zone.x2;
+      }
+      if(elastic_zone_crop_y){
+         if((this.pointsY.get(0) < this.trigger_zone.topY && elastic_zone_above_top_y) || (this.pointsY.get(0) > this.trigger_zone.topY && elastic_zone_below_top_y) ){
+           yTop = this.pointsY.get(0);
+         }else {
+           yTop = this.trigger_zone.topY;
+         }
+         
+        if(elastic_zone_lock_base_y){
+           yBottom = this.trigger_zone.baseY;
+        }else {
+            yBottom = this.pointsY.get(this.pointsY.size()-1);
+        }
+      }else {
+        yTop = trigger_zone.topY;
+        yBottom = trigger_zone.baseY;
+      }
+      
+      
+      
       this.elastic_zone = new TriggerZone(xLeft,yTop,xRight-xLeft, yBottom-yTop);
     }else {
       this.elastic_zone = this.trigger_zone;
@@ -62,6 +93,8 @@ class Synesthesia {
   public void drawElasticZone(){
     
     if(this.elastic_zone != null){
+      colorMode(RGB);
+      stroke(255,255,255);
       this.elastic_zone.draw();
     }
   }
