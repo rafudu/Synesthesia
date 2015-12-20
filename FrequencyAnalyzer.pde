@@ -1,4 +1,5 @@
 class FrequencyAnalyzer{
+  boolean mouseDebug = false;
   FFT fft;
   SoundFile in;
   AudioIn ain;
@@ -33,6 +34,10 @@ class FrequencyAnalyzer{
       float[] point = new float[2];
       point[0] = i;
       point[1] = lineY;
+      if(mouseDebug){
+        point[0] = mouseX;
+        point[1] = mouseY;
+      };
       synesthesia_list.addPoint(point);
       app.line( i, height, i, lineY );
     }

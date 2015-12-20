@@ -28,6 +28,9 @@ class Synesthesia {
   
   public void setTriggerZone(float x, float y, float _width, float _height){
     this.trigger_zone = new TriggerZone(x,y,_width, _height);
+    if(elastic_zone_above_top_y){
+      this.trigger_zone.openTop = true;
+    }
   }
   
   
@@ -94,7 +97,11 @@ class Synesthesia {
     
     if(this.elastic_zone != null){
       colorMode(RGB);
-      stroke(255,255,255);
+      if(this.points.size() > 0){
+        stroke(0,255,255);
+      }else {
+        stroke(255,255,255);
+      }
       this.elastic_zone.draw();
     }
   }

@@ -8,6 +8,8 @@ class TriggerZone{
   public float x2;
   public float topY;
   public float baseY;
+  public boolean openTop = false;
+  
   
   TriggerZone(float x, float y, float width, float height){
     this.x = x;
@@ -24,9 +26,13 @@ class TriggerZone{
 
   public boolean has_point(float x, float y){
     
-    if ((x >= this.x && x <= this.x+this.width && y <= this.y + this.height)){
+    if ((x >= this.x && x <= this.x+this.width) && y <= this.y + this.height){
+      if(!this.openTop &&  y < this.y){
+        return false;
+      }else {
+        return true;
+      }
       
-      return true;
     }else {
       return false;
     }
