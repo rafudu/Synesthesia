@@ -8,7 +8,10 @@ class VHS extends Synesthesia {
     this.opacity = this.points.size()*25;
     this.opacity = 0;
     drawNoise();
-    
+    if(this.hasPoints()){
+      println(this.filledArea(), 100*this.filledArea()/this.trigger_zone.area());
+      println(this.filledArea(), 100*this.filledArea()/this.elastic_zone.area());
+    }
   }
   void drawNoise() {
     

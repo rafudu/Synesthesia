@@ -23,7 +23,10 @@ class TriggerZone{
   public float baseY(){
     return this.y+this.height;
   }
-
+  
+  public float area(){
+    return this.width*this.height;
+  }
   public boolean has_point(float x, float y){
     
     if ((x >= this.x && x <= this.x+this.width) && y <= this.y + this.height){

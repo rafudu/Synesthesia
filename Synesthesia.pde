@@ -42,6 +42,15 @@ class Synesthesia {
     pointsArea = 0;
   }
   
+  public float filledArea(){ // Calculo a area ocupada por cada um dos pontos dentro da triggerzone
+    pointsArea = 0;
+    for (ListIterator<Float> it = pointsY.listIterator(pointsY.size()); it.hasPrevious(); ) {
+      pointsArea += this.trigger_zone.baseY - it.previous();
+    }
+    
+    return pointsArea;
+  }
+  
   public void addPoints(List _points){
     // Aqui eu também aproveito para armazenar algumas informações sobre os pontos: valor y máximo, menor valor de x, maior valor de x, média x, média y...
     clearPoints();
@@ -109,10 +118,14 @@ class Synesthesia {
     this.trigger_zone.draw();
     
   }
+  public boolean hasPoints(){
+    return this.points.size() > 0;
+  }
   public void draw(){
     if(this.points.size() > 0){
-      //println("..");
+      println("..");
       //println(this.points.size());
+      //println(this.filledArea(), this.filledArea()/this.trigger_zone.area());
     }else {
       //println("---");
     }
