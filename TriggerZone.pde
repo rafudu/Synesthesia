@@ -25,7 +25,7 @@ class TriggerZone{
   public boolean has_point(float x, float y){
     
     if ((x >= this.x && x <= this.x+this.width && y <= this.y + this.height)){
-      println(x);
+      
       return true;
     }else {
       return false;

@@ -4,17 +4,13 @@ class Synesthesia {
   public float _width;
   public float _height;
   
-  public float maxY = -1;
-  public float minY = -1;
-  public float maxX = -1;
-  public float minX = -1;
-  public float avg = -1;
-  
-  
   
   TriggerZone trigger_zone;
+  TriggerZone elastic_zone;
   List<float[]> points = new ArrayList<float[]>(); // Os pontos que estão dentro da área de gatilho, com coordenadas x e y
   List<float[]> points_normalized = new ArrayList<float[]>(); // Os pontos que estão dentro da área de gatilho, com coordenadas x e y, normalizados através da função normalize
+  List<Float> pointsX = new ArrayList();
+  List<Float> pointsY = new ArrayList();
   public void bindTriggerZone(TriggerZone z){
     this.trigger_zone = z;
   }
@@ -26,12 +22,13 @@ class Synesthesia {
     this.trigger_zone = new TriggerZone(x,y,_width, _height);
   }
   
+  
+  
   public void clearPoints(){
     this.points.clear();
-    minX = -1;
-    minY = -1;
-    maxX = -1;
-    maxY = -1;
+    pointsX.clear();
+    pointsY.clear();
+  
   }
   
   public void addPoints(List _points){
@@ -42,46 +39,31 @@ class Synesthesia {
       if(this.trigger_zone.has_point(t[0], t[1])){
         float pX = t[0];
         float pY = t[1];
-        // Primeiro eu marco o primeiro valor de X que tem um ponto associado.
-        if(pY <= this.trigger_zone.baseY()){
-          minX = pX;
-        }
-        // Depois computo o maior valor de X e maior valor de Y
-        if(pX > maxX){
-           maxX = pX; 
-        }
-        if(pY > maxY){
-          maxY = pY;
-        }
-        if(minY == -1 || pY < minY){
-          minY = pY;
-        }
-       
+        pointsX.add(pX);
+        pointsY.add(pY);
+        Collections.sort(pointsX);
+        Collections.sort(pointsY);
         this.points.add(t);
       }
     }
+    setupElasticZone();
+  }
+  public void setupElasticZone(){
+    if(this.points.size() > 0){
+      float xLeft = this.pointsX.get(0);
+      float xRight = this.pointsX.get(this.pointsX.size()-1);
+      float yTop = this.pointsY.get(0);
+      float yBottom = this.pointsY.get(this.pointsY.size()-1);
+      this.elastic_zone = new TriggerZone(xLeft,yTop,xRight-xLeft, yBottom-yTop);
+    }else {
+      this.elastic_zone = this.trigger_zone;
+    }
   }
   public void drawElasticZone(){
-    float tzX1 = this.trigger_zone.x; //TriggerZone initial x
-    float tzX2 = this.trigger_zone.x2; // TriggerZone final x;
-    float tzY1= this.trigger_zone.topY; // TriggerZone base Y
-    float tzY2= this.trigger_zone.baseY; // TriggerZone top Y
-    float tzHeight = 0;
     
-    if(minX > tzX1){
-      tzX1 = minX;
+    if(this.elastic_zone != null){
+      this.elastic_zone.draw();
     }
-    if(maxX > minX && maxX < tzX2){
-      tzX2 = maxX;
-    }
-    //if(minY < this.trigger_zone.topY){
-      tzY1 = minY;
-    //}
-    println(this.trigger_zone.topY, "y");
-    colorMode(RGB);
-    stroke(255, 255,255);
-    rect(tzX1, tzY1, tzX2 - tzX1, tzY2-tzY1); 
-    noStroke();
   }
   public void drawZone(){
     this.trigger_zone.draw();
